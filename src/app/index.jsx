@@ -1,9 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, useColorScheme } from "react-native";
 
 export default function Index() {
+  const colorScheme = useColorScheme();
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: colorScheme === "dark" ? "#000" : "#fff" },
+      ]}
+    >
+      <Text style={{ color: colorScheme === "dark" ? "#fff" : "#000" }}>
+        Hello, world!
+      </Text>
     </View>
   );
 }
