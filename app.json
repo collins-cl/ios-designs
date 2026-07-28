@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "iosskeleton",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.anonymous.ios-skeleton"
@@ -32,6 +32,16 @@
           "backgroundColor": "#208AEF",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/static/Inter_18pt-Bold.ttf",
+            "./assets/fonts/static/Inter_18pt-Black.ttf",
+            "./assets/fonts/static/Inter_24pt-Black.ttf"
+          ]
         }
       ]
     ],

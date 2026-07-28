@@ -9,7 +9,14 @@ export default function Index() {
         { backgroundColor: colorScheme === "dark" ? "#000" : "#fff" },
       ]}
     >
-      <Text style={{ color: colorScheme === "dark" ? "#fff" : "#000" }}>
+      <Text
+        style={{
+          color: colorScheme === "dark" ? "#fff" : "#000",
+          fontFamily: "Inter",
+          fontSize: 18,
+          fontWeight: "condensed",
+        }}
+      >
         Hello, world!
       </Text>
     </View>
