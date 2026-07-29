@@ -1,25 +1,37 @@
-import { StyleSheet, Text, View, useColorScheme } from "react-native";
+import { Button, Host, ScrollView } from "@expo/ui";
+import { router } from "expo-router";
+import { StyleSheet, Text, useColorScheme } from "react-native";
 
 export default function Index() {
   const colorScheme = useColorScheme();
+
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: colorScheme === "dark" ? "#000" : "#fff" },
-      ]}
+    <Host
+      style={{
+        flex: 1,
+        backgroundColor: colorScheme === "dark" ? "#000" : "#fff",
+      }}
     >
-      <Text
-        style={{
-          color: colorScheme === "dark" ? "#fff" : "#000",
-          fontFamily: "Inter",
-          fontSize: 18,
-          fontWeight: "condensed",
-        }}
-      >
-        Hello, world!
-      </Text>
-    </View>
+      <ScrollView>
+        <Button
+          style={styles.button}
+          onPress={() => {
+            router.push("/glassview");
+          }}
+        >
+          <Text
+            style={{
+              color: colorScheme === "dark" ? "#fff" : "#000",
+              fontFamily: "Inter",
+              fontSize: 20,
+              fontWeight: "condensed",
+            }}
+          >
+            Hello, world!
+          </Text>
+        </Button>
+      </ScrollView>
+    </Host>
   );
 }
 
@@ -28,5 +40,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "top",
+  },
+
+  button: {
+    width: 200,
+    height: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
