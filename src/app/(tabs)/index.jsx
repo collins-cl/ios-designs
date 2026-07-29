@@ -1,13 +1,5 @@
-import { Button, Host, ScrollView } from "@expo/ui";
-import {
-  buttonBorderShape,
-  buttonStyle,
-  controlSize,
-  labelStyle,
-  tint,
-} from "@expo/ui/swift-ui/modifiers";
-import { router } from "expo-router";
-import { StyleSheet } from "react-native";
+import { Host, ScrollView } from "@expo/ui";
+import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../theme/ThemeProvider";
 
 export default function Index() {
@@ -20,30 +12,19 @@ export default function Index() {
         backgroundColor: colors.background,
       }}
     >
-      <ScrollView style={{ padding: 8 }}>
-        <Button
-          systemImage="gear"
-          modifiers={[labelStyle("iconOnly"), tint("#FF6347")]}
-          onPress={() => {
-            router.push("/glassview");
-          }}
-          label="hello world"
-        />
-        <Button label="Bordered" modifiers={[buttonStyle("bordered")]} />
-        <Button
-          label="Bordered Prominent"
-          modifiers={[buttonStyle("borderedProminent")]}
-        />
-        <Button label="Borderless" modifiers={[buttonStyle("borderless")]} />
-        <Button
-          label="hive"
-          role="Cancel"
-          modifiers={[
-            buttonStyle("glass"),
-            buttonBorderShape("circle"),
-            controlSize("extraLarge"),
-          ]}
-        />
+      <ScrollView style={{ padding: 16 }}>
+        <View>
+          <Text
+            style={{
+              color: colors.text,
+              fontFamily: "Inter",
+              fontSize: 18,
+              fontWeight: "condensed",
+            }}
+          >
+            Chat
+          </Text>
+        </View>
       </ScrollView>
     </Host>
   );

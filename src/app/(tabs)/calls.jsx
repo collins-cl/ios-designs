@@ -2,7 +2,7 @@ import { Host, ScrollView } from "@expo/ui";
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../theme/ThemeProvider";
 
-const settings = () => {
+const calls = () => {
   const { colors } = useTheme();
 
   return (
@@ -22,7 +22,7 @@ const settings = () => {
               fontWeight: "condensed",
             }}
           >
-            Settings
+            Calls
           </Text>
         </View>
       </ScrollView>
@@ -30,12 +30,6 @@ const settings = () => {
   );
 };
 
-export default settings;
+export default calls;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "top",
-  },
-});
+const styles = StyleSheet.create({});
