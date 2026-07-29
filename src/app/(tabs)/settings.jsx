@@ -1,21 +1,22 @@
 import { Host, ScrollView } from "@expo/ui";
-import { StyleSheet, Text, useColorScheme, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { useTheme } from "../../theme/ThemeProvider";
 
 const settings = () => {
-  const colorScheme = useColorScheme();
+  const { colors } = useTheme();
 
   return (
     <Host
       style={{
         flex: 1,
-        backgroundColor: colorScheme === "dark" ? "#000" : "#fff",
+        backgroundColor: colors.background,
       }}
     >
-      <ScrollView>
+      <ScrollView style={{ padding: 16 }}>
         <View>
           <Text
             style={{
-              color: colorScheme === "dark" ? "#fff" : "#000",
+              color: colors.text,
               fontFamily: "Inter",
               fontSize: 18,
               fontWeight: "condensed",

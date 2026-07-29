@@ -1,18 +1,19 @@
 import { Button, Host, ScrollView } from "@expo/ui";
 import { router } from "expo-router";
-import { StyleSheet, Text, useColorScheme } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import { useTheme } from "../../theme/ThemeProvider";
 
 export default function Index() {
-  const colorScheme = useColorScheme();
+  const { colors } = useTheme();
 
   return (
     <Host
       style={{
         flex: 1,
-        backgroundColor: colorScheme === "dark" ? "#000" : "#fff",
+        backgroundColor: colors.background,
       }}
     >
-      <ScrollView>
+      <ScrollView style={{ padding: 16 }}>
         <Button
           style={styles.button}
           onPress={() => {
@@ -21,7 +22,7 @@ export default function Index() {
         >
           <Text
             style={{
-              color: colorScheme === "dark" ? "#fff" : "#000",
+              color: colors.text,
               fontFamily: "Inter",
               fontSize: 20,
               fontWeight: "condensed",
