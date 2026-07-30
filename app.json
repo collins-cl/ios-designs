@@ -18,7 +18,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.iosskeleton"
     },
     "web": {
       "output": "static",
@@ -34,16 +35,7 @@
           "imageWidth": 76
         }
       ],
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/static/Inter_18pt-Bold.ttf",
-            "./assets/fonts/static/Inter_18pt-Black.ttf",
-            "./assets/fonts/static/Inter_24pt-Black.ttf"
-          ]
-        }
-      ]
+      ["expo-font"]
     ],
     "experiments": {
       "typedRoutes": true,

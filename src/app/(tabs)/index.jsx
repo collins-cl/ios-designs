@@ -1,32 +1,61 @@
-import { Host, ScrollView } from "@expo/ui";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "@expo/ui";
+import { Host, Text } from "@expo/ui/swift-ui";
+import { Stack } from "expo-router";
+import { StyleSheet } from "react-native";
 import { useTheme } from "../../theme/ThemeProvider";
 
 export default function Index() {
   const { colors } = useTheme();
 
   return (
-    <Host
-      style={{
-        flex: 1,
-        backgroundColor: colors.background,
-      }}
-    >
-      <ScrollView style={{ padding: 16 }}>
-        <View>
-          <Text
-            style={{
-              color: colors.text,
-              fontFamily: "Inter",
-              fontSize: 18,
-              fontWeight: "condensed",
-            }}
-          >
-            Chat
-          </Text>
-        </View>
-      </ScrollView>
-    </Host>
+    <>
+      {/* <Header
+        left={
+          <Host matchContents>
+            <Button
+              label="Edit"
+              modifiers={[buttonStyle("glass"), controlSize("large")]}
+            />
+          </Host>
+        }
+        right={
+          <Host matchContents>
+            <Button modifiers={[buttonStyle("glass"), controlSize("large")]}>
+              <HStack>
+                <Text>hehe</Text>
+              </HStack>
+            </Button>
+          </Host>
+        }
+
+      /> */}
+
+      <Stack.Toolbar placement="right">
+        <Stack.Toolbar.Button icon="a.book.closed" />
+      </Stack.Toolbar>
+
+      <Host
+        style={{
+          flex: 1,
+          backgroundColor: colors.background,
+        }}
+      >
+        <ScrollView
+          showsIndicators={false}
+          style={{
+            paddingTop: 54,
+            paddingHorizontal: 16,
+            paddingBottom: 20,
+          }}
+        >
+          {Array.from({ length: 100 }).map((_, i) => (
+            <Text key={i} style={{ color: colors.text, marginBottom: 2 }}>
+              Chat {i}
+            </Text>
+          ))}
+        </ScrollView>
+      </Host>
+    </>
   );
 }
 
