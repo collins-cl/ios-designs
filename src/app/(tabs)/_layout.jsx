@@ -5,23 +5,22 @@ export default function TabLayout() {
     <NativeTabs>
       <NativeTabs.Trigger name="home">
         <NativeTabs.Trigger.Icon
-          sf={{ default: "message.fill", selected: "message" }}
+          sf={{ default: "link.circle.fill", selected: "link.circle" }}
         />
-        <NativeTabs.Trigger.Label>Chat</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>Links</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="contacts">
-        <NativeTabs.Trigger.Label>Contacts</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>Others</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
           sf={{
-            default: "person.crop.circle.fill",
-            selected: "person.crop.circle",
+            default: "ellipsis",
+            selected: "ellipsis.circle",
           }}
         />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="search" role="search">
         <NativeTabs.Trigger.Icon sf="magnifyingglass" />
-        <NativeTabs.Trigger.Label>Search</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );
