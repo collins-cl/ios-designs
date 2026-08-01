@@ -45,32 +45,22 @@ export default function Index() {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            paddingTop: top + 54,
+            paddingTop: top + 64,
             marginBottom: 10,
             paddingHorizontal: 16,
           }}
         >
           <View style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {Array.from({ length: 40 }).map((_, index) => (
-              <View key={index} style={{ width: 200, height: 40 }}>
-                <Pressable
-                  style={{
-                    width: 200,
-                    height: 40,
-                    borderColor: colors.border,
-                    borderWidth: 1,
-                    borderRadius: 20,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  onPress={() => console.log("hello", index + 1)}
-                >
-                  <ThemedText colorName="primary" type="default">
-                    Link to this
-                  </ThemedText>
-                </Pressable>
-              </View>
+              <Pressable
+                key={index}
+                style={[{ borderColor: colors.border }, styles.button]}
+                onPress={() => console.log("hello", index + 1)}
+              >
+                <ThemedText colorName="primary" type="default">
+                  Link to this
+                </ThemedText>
+              </Pressable>
             ))}
           </View>
         </ScrollView>
@@ -88,9 +78,11 @@ const styles = StyleSheet.create({
 
   button: {
     width: 200,
-    height: 50,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 20,
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
   },
 });
