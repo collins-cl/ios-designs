@@ -4,6 +4,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedText from "../../../components/ui/ThemedText";
 import { useTheme } from "../../../theme/ThemeProvider";
 
+const RoutingOptions = [
+  {
+    id: 1,
+    title: "telegram chats menu",
+    href: "/telegram",
+  },
+];
+
 export default function Index() {
   const { colors } = useTheme();
   const router = useRouter();
@@ -51,14 +59,14 @@ export default function Index() {
           }}
         >
           <View style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {Array.from({ length: 40 }).map((_, index) => (
+            {RoutingOptions.map((route, index) => (
               <Pressable
                 key={index}
                 style={[{ borderColor: colors.border }, styles.button]}
-                onPress={() => console.log("hello", index + 1)}
+                onPress={() => router.push(`${route.href}`)}
               >
                 <ThemedText colorName="primary" type="default">
-                  Link to this
+                  {route.title}
                 </ThemedText>
               </Pressable>
             ))}
