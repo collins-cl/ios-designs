@@ -62,10 +62,10 @@ export default function Index() {
             {RoutingOptions.map((route, index) => (
               <Pressable
                 key={index}
-                style={[{ borderColor: colors.border }, styles.button]}
+                style={[{ borderColor: colors.primary }, styles.button]}
                 onPress={() => router.push(`${route.href}`)}
               >
-                <ThemedText colorName="primary" type="default">
+                <ThemedText colorName="text" type="default">
                   {route.title}
                 </ThemedText>
               </Pressable>
