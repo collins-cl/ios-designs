@@ -1,11 +1,10 @@
 import { Stack } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import Animated, {
-  clamp,
   useAnimatedScrollHandler,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
+  withSpring,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedText from "../../components/ui/ThemedText";
@@ -23,16 +22,25 @@ const AnimatedThemedText = Animated.createAnimatedComponent(ThemedText);
 const index = () => {
   const { top } = useSafeAreaInsets();
   const { colors } = useTheme();
-  //   const translateX = useSharedValue(0);
+  const translateX = useSharedValue(0);
   const lastScrollY = useSharedValue(0);
 
   const onScroll = useAnimatedScrollHandler((event) => {
-    lastScrollY.value = Math.round(event.contentOffset.y);
-    console.log(lastScrollY.value);
-  });
+    const currentY = Math.round(event.contentOffset.y);
+    const clampedY = Math.max(0, currentY);
+    if (clampedY > lastScrollY.value) {
+      translateX.value = withSpring(MAX_TRANSLATE_X_VALUE, {
+        stiffness: 900,
+        damping: 120,
+      });
+    } else if (clampedY < lastScrollY.value) {
+      translateX.value = withSpring(0, {
+        stiffness: 900,
+        damping: 120,
+      });
+    }
 
-  const translateX = useDerivedValue(() => {
-    return clamp(lastScrollY.value, 0, MAX_TRANSLATE_X_VALUE);
+    lastScrollY.value = clampedY;
   });
 
   const titleTransfomAnim = useAnimatedStyle(() => {
@@ -57,6 +65,7 @@ const index = () => {
         <Animated.ScrollView
           onScroll={onScroll}
           scrollEventThrottle={16}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingTop: TOTAL_HEIGHT,
             paddingHorizontal: 16,
