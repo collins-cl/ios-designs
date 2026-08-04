@@ -1,22 +1,28 @@
 import { Stack, useRouter } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedText from "../../../components/ui/ThemedText";
 import { useTheme } from "../../../theme/ThemeProvider";
 
-const RoutingOptions = [
-  {
-    id: 1,
-    title: "telegram chats menu",
-    href: "/telegram",
-  },
-];
+const RoutingOptions = Array.from({ length: 20 }, (_, index) => ({
+  id: index + 1,
+  title: `telegram chats menu ${index + 1}`,
+  href: "/telegram",
+}));
 
 export default function Index() {
   const { colors } = useTheme();
   const router = useRouter();
   const { top } = useSafeAreaInsets();
+  const scrollY = useSharedValue(0);
 
+  const onScroll = useAnimatedScrollHandler((event) => {
+    scrollY.value = Math.round(event.contentOffset.y);
+  });
   return (
     <>
       <Stack.Screen
@@ -50,14 +56,24 @@ export default function Index() {
           backgroundColor: colors.background,
         }}
       >
-        <ScrollView
+        <Animated.ScrollView
           showsVerticalScrollIndicator={false}
+          onScroll={onScroll}
           style={{
-            paddingTop: top + 64,
+            flex: 1,
+            paddingTop: top + 14,
             marginBottom: 10,
             paddingHorizontal: 16,
           }}
         >
+          <View style={styles.headerContainer}>
+            <View style={styles.headerTopContent}>
+              <ThemedText colorName="text" type="bold">
+                Chats
+              </ThemedText>
+            </View>
+          </View>
+
           <View style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {RoutingOptions.map((route, index) => (
               <Pressable
@@ -71,7 +87,7 @@ export default function Index() {
               </Pressable>
             ))}
           </View>
-        </ScrollView>
+        </Animated.ScrollView>
       </View>
     </>
   );
@@ -89,6 +105,16 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderRadius: 20,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  headerContainer: {
+    flex: 1,
+  },
+
+  headerTopContent: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

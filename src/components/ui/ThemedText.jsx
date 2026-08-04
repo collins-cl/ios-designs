@@ -3,7 +3,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 
 export default function ThemedText({
   style,
-  colorName = "primary",
+  colorName = "text",
   type = "default",
   ...rest
 }) {

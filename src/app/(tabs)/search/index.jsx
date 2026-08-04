@@ -1,7 +1,9 @@
 import { Stack } from "expo-router";
 import { View } from "react-native";
+import { useTheme } from "../../../theme/ThemeProvider";
 
 export default function index() {
+  const { colors } = useTheme();
   return (
     <>
       <Stack.Toolbar placement="right">
@@ -11,7 +13,7 @@ export default function index() {
         />
       </Stack.Toolbar>
 
-      <View style={{ flex: 1 }} />
+      <View style={{ flex: 1, backgroundColor: colors.background }} />
     </>
   );
 }
