@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -10,9 +10,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedText from "../../components/ui/ThemedText";
 import { useTheme } from "../../theme/ThemeProvider";
 
-const HEADER_HEIGHT = 62;
-const TOTAL_HEIGHT = 62 + 56;
+const HEADER_HEIGHT = 62 + 12;
+const TOTAL_HEIGHT = 62 + 170;
 const MAX_TRANSLATE_X_VALUE = 40;
+const COLLAPSE_AT = 8;
+const EXPAND_AT = 20;
 const items = Array.from({ length: 100 }, (_, index) => ({
   id: index + 1,
   label: `Message ${index + 1}`,
@@ -24,10 +26,17 @@ const index = () => {
   const { colors } = useTheme();
   const translateX = useSharedValue(0);
   const lastScrollY = useSharedValue(0);
+  const isCollapsed = useSharedValue(false);
+  const avatarTranslateY = useSharedValue(0);
+  const avatarScale = useSharedValue(1);
+  const avatarOpacity = useSharedValue(1);
+  const marginRight = useSharedValue(8);
 
   const onScroll = useAnimatedScrollHandler((event) => {
     const currentY = Math.round(event.contentOffset.y);
     const clampedY = Math.max(0, currentY);
+    console.log(clampedY);
+
     if (clampedY > lastScrollY.value) {
       translateX.value = withSpring(MAX_TRANSLATE_X_VALUE, {
         stiffness: 900,
@@ -39,8 +48,19 @@ const index = () => {
         damping: 120,
       });
     }
-
     lastScrollY.value = clampedY;
+
+    if (currentY > COLLAPSE_AT && !isCollapsed.value) {
+      isCollapsed.value = true;
+      avatarTranslateY.value = withSpring(-20);
+      avatarScale.value = withSpring(0.85);
+      marginRight.value = withSpring(-10);
+    } else if (currentY <= EXPAND_AT && isCollapsed.value) {
+      isCollapsed.value = false;
+      avatarTranslateY.value = withSpring(0);
+      avatarScale.value = withSpring(1);
+      marginRight.value = withSpring(8);
+    }
   });
 
   const titleTransfomAnim = useAnimatedStyle(() => {
@@ -52,6 +72,16 @@ const index = () => {
       ],
     };
   });
+
+  const avatarStyle = useAnimatedStyle(() => ({
+    marginRight: marginRight.value,
+    opacity: avatarOpacity.value,
+    transform: [
+      { translateY: avatarTranslateY.value },
+
+      { scale: avatarScale.value },
+    ],
+  }));
 
   return (
     <>
@@ -91,6 +121,24 @@ const index = () => {
             </AnimatedThemedText>
             <ThemedText colorName="primary">right</ThemedText>
           </Animated.View>
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.statusContainer}
+            style={{ marginHorizontal: 0 }}
+          >
+            {Array.from({ length: 15 }, (_, index) => (
+              <Animated.View
+                key={index}
+                style={[
+                  avatarStyle,
+                  styles.statusAvatar,
+                  index === 14 && styles.statusAvatarLast,
+                ]}
+              />
+            ))}
+          </ScrollView>
         </Animated.View>
       </View>
     </>
@@ -107,7 +155,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 100,
     height: TOTAL_HEIGHT,
-    backgroundColor: "lightgrey",
   },
 
   headerContainer: {
@@ -117,7 +164,32 @@ const styles = StyleSheet.create({
     paddingTop: HEADER_HEIGHT,
     paddingHorizontal: 16,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
+  },
+
+  statusWrapper: {
+    width: "100%",
+  },
+  statusContainer: {
+    flexGrow: 1,
+    height: 100,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingRight: 24,
+    marginTop: 10,
+  },
+
+  statusAvatar: {
+    width: 70,
+    height: 70,
+    backgroundColor: "red",
+    borderRadius: 50,
+    marginRight: 8,
+  },
+
+  statusAvatarLast: {
+    marginRight: 0,
   },
 });
