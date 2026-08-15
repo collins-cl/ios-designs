@@ -8,11 +8,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedText from "../../../components/ui/ThemedText";
 import { useTheme } from "../../../theme/ThemeProvider";
 
-const RoutingOptions = Array.from({ length: 20 }, (_, index) => ({
-  id: index + 1,
-  title: `telegram chats menu ${index + 1}`,
-  href: "/telegram",
-}));
+const RoutingOptions = [
+  {
+    id: 1,
+    title: `telegram chats menu`,
+    href: "/telegram",
+  },
+  {
+    id: 2,
+    title: `grok screen`,
+    href: "/grokScreen",
+  },
+];
 
 export default function Index() {
   const { colors } = useTheme();
