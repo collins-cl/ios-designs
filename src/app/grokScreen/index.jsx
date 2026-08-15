@@ -1,13 +1,19 @@
-import { Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Stack, useRouter } from "expo-router";
+import { useRef } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import GrokSvg from "../../components/ui/GrokSvg";
 import { useTheme } from "../../theme/ThemeProvider";
 
 const index = () => {
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
+  const router = useRouter();
+  const sheetRef = useRef();
 
+  const openSheet = () => {
+    sheetRef.current?.present();
+  };
   return (
     <>
       <Stack.Screen
@@ -22,9 +28,9 @@ const index = () => {
           styles.screenView,
         ]}
       >
-        <View>
-          <GrokSvg />
-        </View>
+        <Pressable onPress={() => router.push("grokBottomSheet")}>
+          <GrokSvg size={70} />
+        </Pressable>
       </View>
     </>
   );
