@@ -18,12 +18,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Inter",
   },
+  regular: {
+    fontSize: 20,
+    fontFamily: "Inter",
+  },
   title: {
     fontSize: 24,
-    fontFamily: "InterSemiBold",
+    fontFamily: "InterBold",
   },
   semiBold: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: "InterSemiBold",
   },
   bold: {
@@ -31,10 +35,6 @@ const styles = StyleSheet.create({
     fontFamily: "InterBold",
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: "Inter",
-  },
-  regular: {
     fontSize: 14,
     fontFamily: "InterRegular",
   },

@@ -5,15 +5,30 @@ import {
   buttonStyle,
   controlSize,
   labelStyle,
+  tint,
 } from "@expo/ui/swift-ui/modifiers";
 
 export default function GlassButton({
   onPress,
-  type = "xmark",
+  type = "",
   label = "",
   role = "default",
   shape = "circle",
+  size = "regular",
+  width,
 }) {
+  const labelMode =
+    label && type ? "titleAndIcon" : label ? "titleOnly" : "iconOnly";
+
+  const modifiers = [];
+
+  modifiers.push(
+    buttonStyle("glass"),
+    buttonBorderShape(shape),
+    labelStyle(labelMode),
+    controlSize(size),
+  );
+
   return (
     <Host matchContents style={{ flexGrow: 0 }}>
       <Button
@@ -21,13 +36,8 @@ export default function GlassButton({
         systemImage={type}
         role={role}
         onPress={onPress}
-        modifiers={[
-          buttonStyle("glass"),
-          buttonBorderShape(shape),
-          labelStyle("iconOnly"),
-          controlSize("large"),
-        ]}
-      />
+        modifiers={modifiers}
+      ></Button>
     </Host>
   );
 }

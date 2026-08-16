@@ -68,19 +68,11 @@ export default function Index() {
           onScroll={onScroll}
           style={{
             flex: 1,
-            paddingTop: top + 14,
+            paddingTop: top + 64,
             marginBottom: 10,
             paddingHorizontal: 16,
           }}
         >
-          <View style={styles.headerContainer}>
-            <View style={styles.headerTopContent}>
-              <ThemedText colorName="text" type="bold">
-                Chats
-              </ThemedText>
-            </View>
-          </View>
-
           <View style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {RoutingOptions.map((route, index) => (
               <Pressable

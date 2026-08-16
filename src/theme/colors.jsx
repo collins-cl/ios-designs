@@ -1,11 +1,13 @@
 export const Colors = {
   light: {
     background: "#FFFFFF",
-    surface: "#F8F9FA",
-    card: "#FFFFFF",
-    paper: "#FFFFFF",
+    surface: "#f2f2f2",
+    paper: "#f1ecec",
+    alternateSurface: "#131315",
 
     text: "#0b101b",
+    alternateText: "#ffffff",
+
     textSecondary: "#6B7280",
     textMuted: "#9CA3AF",
 
@@ -22,10 +24,11 @@ export const Colors = {
   dark: {
     background: "#0a0d16",
     surface: "#131315",
-    card: "#2C2C2E",
     paper: "#1C1C1E",
+    alternateSurface: "#FFFFFF",
 
     text: "#ffffff",
+    alternateText: "#0b101b",
     textSecondary: "#CBD5E1",
     textMuted: "#94A3B8",
 

@@ -28,7 +28,7 @@ const index = () => {
           styles.screenView,
         ]}
       >
-        <Pressable onPress={() => router.push("grokBottomSheet")}>
+        <Pressable onPress={() => router.push("/grokBottomSheet")}>
           <GrokSvg size={70} />
         </Pressable>
       </View>
