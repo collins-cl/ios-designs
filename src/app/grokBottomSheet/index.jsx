@@ -58,24 +58,40 @@ const index = () => {
         return (
           <View
             style={{
+              flex: 1,
+              justifyContent: "center",
               alignItems: "center",
               gap: 14,
-              paddingTop: 70,
             }}
           >
-            <GlassView
-              style={[
-                styles.imageContainer,
-                { backgroundColor: colors.surface },
-              ]}
-              glassEffectStyle="clear"
-            >
-              <Image
-                source={Logo}
-                style={{ width: 40, height: 40 }}
-                contentFit="contain"
-              />
-            </GlassView>
+            <View style={{ width: 100, height: 100 }}>
+              <View
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                  zIndex: 0,
+                  transform: [{ translateY: 12 }],
+                }}
+              >
+                <RadialGradient
+                  color={gradientColors.red[0]}
+                  load={connecting}
+                />
+              </View>
+
+              <GlassView
+                style={[
+                  styles.imageContainer,
+                  { backgroundColor: colors.surface, zIndex: 1 },
+                ]}
+                glassEffectStyle="clear"
+              >
+                <Image
+                  source={Logo}
+                  style={{ width: 40, height: 40 }}
+                  contentFit="contain"
+                />
+              </GlassView>
+            </View>
 
             <ThemedText type="regular" style={{ fontWeight: "500" }}>
               Gmail
@@ -221,19 +237,6 @@ const index = () => {
           end={{ x: 0, y: 1 }}
           style={styles.linearGradient}
         />
-
-        <View
-          style={{
-            position: "absolute",
-            top: 70,
-            left: WIDTH / 2 - 50,
-            width: 100,
-            height: 100,
-            zIndex: -1,
-          }}
-        >
-          <RadialGradient color={gradientColors.red[0]} load={connecting} />
-        </View>
 
         <View
           style={{
