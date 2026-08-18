@@ -45,6 +45,8 @@ PODS:
     - ExpoModulesCore
   - ExpoKeepAwake (57.0.1):
     - ExpoModulesCore
+  - ExpoLinearGradient (57.0.1):
+    - ExpoModulesCore
   - ExpoLinking (57.0.4):
     - ExpoModulesCore
   - ExpoLogBox (57.0.1):
@@ -101,8 +103,12 @@ PODS:
     - ExpoModulesCore
   - FBLazyVector (0.86.0)
   - hermes-engine (250829098.0.14):
-    - hermes-engine/Pre-built (= 250829098.0.14)
-  - hermes-engine/Pre-built (250829098.0.14)
+    - hermes-engine/cdp (= 250829098.0.14)
+    - hermes-engine/Hermes (= 250829098.0.14)
+    - hermes-engine/Public (= 250829098.0.14)
+  - hermes-engine/cdp (250829098.0.14)
+  - hermes-engine/Hermes (250829098.0.14)
+  - hermes-engine/Public (250829098.0.14)
   - RCTDeprecation (0.86.0)
   - RCTRequired (0.86.0)
   - RCTSwiftUI (0.86.0)
@@ -2312,6 +2318,7 @@ DEPENDENCIES:
   - ExpoGlassEffect (from `../node_modules/expo-glass-effect/ios`)
   - ExpoImage (from `../node_modules/expo-image/ios/ExpoImage.podspec`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
+  - ExpoLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - ExpoLinking (from `../node_modules/expo-linking/ios`)
   - "ExpoLogBox (from `../node_modules/@expo/log-box`)"
   - ExpoModulesCore (from `../node_modules/expo-modules-core/ExpoModulesCore.podspec`)
@@ -2431,6 +2438,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/expo-image/ios/ExpoImage.podspec"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
+  ExpoLinearGradient:
+    :path: "../node_modules/expo-linear-gradient/ios"
   ExpoLinking:
     :path: "../node_modules/expo-linking/ios"
   ExpoLogBox:
@@ -2633,6 +2642,7 @@ SPEC CHECKSUMS:
   ExpoGlassEffect: 5d25ad0b43e81255ff5d41039eb2131ebf7aaa5a
   ExpoImage: f88707945a631f6b4b9cf71865f8002c7bb73785
   ExpoKeepAwake: 20a87dafdd9d84d68673e8eaf1a1c7eed8f92659
+  ExpoLinearGradient: 93e951fa19ee7b4bb1a8e2c97227bcfc4bacfa9a
   ExpoLinking: e585bd571199811a0e95f804adc6f5e714c238f3
   ExpoLogBox: 083b0283fc9df6748661caec5a2837569d83b8a6
   ExpoModulesCore: aeee6b62183c18e04468fe8a2135ddf27aad10e5
@@ -2646,7 +2656,7 @@ SPEC CHECKSUMS:
   ExpoUI: 1e538c474877ab878dbb0e62e7e1b67c049672f7
   ExpoWebBrowser: f93f4989f6c2a34cfaba5461ea3572c191947e0f
   FBLazyVector: b3e7ad108f0d882e30445c5527d774e3fd432f3d
-  hermes-engine: 3f01c4250e80454a74e414f56fbb89971f43bc29
+  hermes-engine: 90d8f2c9f327f3439cf1ad519d90d545b6a1d2a5
   RCTDeprecation: 2a74a2c57675e64419bd89078efde81f7c1de90b
   RCTRequired: 30451112e6fef4e6f31b4e7eee0845156e35e4b0
   RCTSwiftUI: 5aaf0b07e747ba749dc6acc94d8bd41eea4b570f
