@@ -196,7 +196,7 @@ const GrokBottomSheetRenderStep = ({
             </Animated.View>
           </View>
 
-          <Animated.View
+          {/* <Animated.View
             style={[
               {
                 paddingHorizontal: 16,
@@ -232,7 +232,7 @@ const GrokBottomSheetRenderStep = ({
                 </ThemedText>
               </Pressable>
             </GlassView>
-          </Animated.View>
+          </Animated.View> */}
         </View>
       );
 
