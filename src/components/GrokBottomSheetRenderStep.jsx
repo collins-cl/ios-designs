@@ -1,12 +1,24 @@
 import { GlassView } from "expo-glass-effect";
 import { Image } from "expo-image";
+import { useEffect } from "react";
 import { Dimensions, Pressable, StyleSheet, View } from "react-native";
+import Animated, {
+  createAnimatedComponent,
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
 import Logo from "../../assets/app-svgs/Gmail.svg";
 import RadialGradient from "./RadialGradient";
 import Spinner from "./ui/Spinner";
 import ThemedText from "./ui/ThemedText";
 
 const WIDTH = Dimensions.get("window").width;
+const AnimatedGlassView = createAnimatedComponent(GlassView);
 
 const GrokBottomSheetRenderStep = ({
   step,
@@ -15,6 +27,48 @@ const GrokBottomSheetRenderStep = ({
   onConnect,
   color,
 }) => {
+  const DURATION = 500;
+  const scaledLogo = useSharedValue(1.5);
+  const viewOpacity = useSharedValue(0);
+
+  const scaleAnim = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          scale: scaledLogo.value,
+        },
+      ],
+    };
+  });
+
+  const viewOpacityAnim = useAnimatedStyle(() => {
+    return {
+      opacity: viewOpacity.value,
+    };
+  });
+
+  useEffect(() => {
+    if (step === "connected") {
+      ((scaledLogo.value = withDelay(
+        DURATION,
+        withSpring(1, {
+          dampingRatio: 0.4,
+          mass: 0.6,
+          stiffness: 300,
+          overshootClamping: false,
+        }),
+      )),
+        (viewOpacity.value = withDelay(
+          DURATION * 3,
+          withTiming(1, {
+            duration: DURATION,
+            easing: Easing.inOut(Easing.quad),
+            reduceMotion: ReduceMotion.System,
+          }),
+        )));
+    }
+  }, [step]);
+
   switch (step) {
     case "intro":
       return (
@@ -27,16 +81,6 @@ const GrokBottomSheetRenderStep = ({
           }}
         >
           <View style={{ width: 100, height: 100 }}>
-            <View
-              style={{
-                ...StyleSheet.absoluteFillObject,
-                zIndex: 0,
-                transform: [{ translateY: 12 }],
-              }}
-            >
-              <RadialGradient color={color} load={connecting} />
-            </View>
-
             <GlassView
               style={[
                 styles.imageContainer,
@@ -101,23 +145,42 @@ const GrokBottomSheetRenderStep = ({
               gap: 18,
             }}
           >
-            <GlassView
-              style={[styles.imageContainer]}
-              glassEffectStyle="regular"
-            >
-              <Image
-                source={Logo}
-                style={{ width: 40, height: 40 }}
-                contentFit="contain"
-              />
-            </GlassView>
+            <View style={{ width: 100, height: 100 }}>
+              <View
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                  zIndex: 0,
+                  transform: [{ translateY: 12 }],
+                }}
+              >
+                <RadialGradient color={color} load={connecting} />
+              </View>
 
-            <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                gap: 6,
-              }}
+              <AnimatedGlassView
+                style={[
+                  styles.imageContainer,
+                  scaleAnim,
+                  { backgroundColor: colors.surface, zIndex: 1 },
+                ]}
+                glassEffectStyle="clear"
+              >
+                <Image
+                  source={Logo}
+                  style={[{ width: 40, height: 40 }]}
+                  contentFit="contain"
+                />
+              </AnimatedGlassView>
+            </View>
+
+            <Animated.View
+              style={[
+                viewOpacityAnim,
+                {
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 6,
+                },
+              ]}
             >
               <ThemedText style={{ fontWeight: "500", fontSize: 18 }}>
                 Gmail is connected
@@ -130,15 +193,17 @@ const GrokBottomSheetRenderStep = ({
               >
                 Grok is able to use it now
               </ThemedText>
-            </View>
+            </Animated.View>
           </View>
 
-          <View
-            style={{
-              paddingHorizontal: 16,
-              paddingBottom: 20,
-              alignItems: "center",
-            }}
+          <Animated.View
+            style={[
+              {
+                paddingHorizontal: 16,
+                paddingBottom: 20,
+                alignItems: "center",
+              },
+            ]}
           >
             <GlassView
               glassEffectStyle="regular"
@@ -167,7 +232,7 @@ const GrokBottomSheetRenderStep = ({
                 </ThemedText>
               </Pressable>
             </GlassView>
-          </View>
+          </Animated.View>
         </View>
       );
 

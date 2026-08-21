@@ -5,6 +5,7 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withSpring,
 } from "react-native-reanimated";
 import Svg, {
@@ -24,10 +25,13 @@ const RadialGradient = ({ color = "#ff6b6b", load = true }) => {
 
   useEffect(() => {
     if (load) {
-      circleScale.value = withSpring(targetScale, {
-        duration: 1000,
-        damping: 200,
-      });
+      circleScale.value = withDelay(
+        500,
+        withSpring(targetScale, {
+          duration: 1000,
+          damping: 200,
+        }),
+      );
     }
   }, [load]);
 

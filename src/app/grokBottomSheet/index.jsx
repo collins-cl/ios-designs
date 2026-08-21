@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Stack, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import GrokBottomSheetRenderStep from "../../components/grokBottomSheetRenderStep";
+import GrokBottomSheetRenderStep from "../../components/GrokBottomSheetRenderStep";
 import GlassButton from "../../components/ui/GlassButton";
 import { useTheme } from "../../theme/ThemeProvider";
 
