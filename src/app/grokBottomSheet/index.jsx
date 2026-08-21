@@ -1,14 +1,22 @@
 // import { LinearGradient } from "expo-linear-gradient";
 import { LinearGradient } from "expo-linear-gradient";
 import { Stack, useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
+import {
+  createAnimatedComponent,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withTiming,
+} from "react-native-reanimated";
 import GrokBottomSheetRenderStep from "../../components/GrokBottomSheetRenderStep";
 import GlassButton from "../../components/ui/GlassButton";
 import { useTheme } from "../../theme/ThemeProvider";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
+const AnimatedLinearGradient = createAnimatedComponent(LinearGradient);
 
 const gradientColors = {
   red: [
@@ -37,7 +45,29 @@ const index = () => {
   const { colors } = useTheme();
   const router = useRouter();
   const [step, setStep] = useState("intro");
+  const linearTranslateY = useSharedValue(-1000);
   const [connecting, setConnecting] = useState(false);
+
+  const linearTranslateYAnim = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: linearTranslateY.value,
+        },
+      ],
+    };
+  });
+
+  useEffect(() => {
+    if (step === "intro") {
+      linearTranslateY.value = withDelay(
+        500,
+        withTiming(0, {
+          duration: 1000,
+        }),
+      );
+    }
+  }, [step]);
 
   const handleConnect = useCallback(() => {
     setConnecting(true);
@@ -66,13 +96,15 @@ const index = () => {
           color={gradientColors.red[0]}
         />
 
-        <LinearGradient
-          colors={gradientColors.red}
-          locations={[0, 0.35, 0.75, 1]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1 }}
-          style={styles.linearGradient}
-        />
+        {step === "intro" ? (
+          <AnimatedLinearGradient
+            colors={gradientColors.red}
+            locations={[0, 0.35, 0.75, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={[linearTranslateYAnim, styles.linearGradient]}
+          />
+        ) : null}
 
         <View
           style={{

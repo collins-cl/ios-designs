@@ -150,7 +150,7 @@ const GrokBottomSheetRenderStep = ({
                 style={{
                   ...StyleSheet.absoluteFillObject,
                   zIndex: 0,
-                  transform: [{ translateY: 12 }],
+                  transform: [{ translateY: 30 }],
                 }}
               >
                 <RadialGradient color={color} load={connecting} />

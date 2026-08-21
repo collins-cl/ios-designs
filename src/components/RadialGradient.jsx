@@ -37,8 +37,8 @@ const RadialGradient = ({ color = "#ff6b6b", load = true }) => {
 
   const rStyle = useAnimatedStyle(() => {
     return {
-      width: r.value * 2,
-      height: r.value * 2,
+      width: r.value * 3,
+      height: r.value * 3,
       borderRadius: r.value,
       opacity: interpolate(
         circleScale.value,
