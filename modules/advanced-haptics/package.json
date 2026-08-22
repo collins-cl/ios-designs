@@ -1,0 +1,26 @@
+{
+  "name": "advanced-haptics",
+  "version": "1.0.0",
+  "description": "Local Expo native module wrapping Apple Core Haptics for customizable iOS haptic effects.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false,
+  "keywords": [
+    "expo",
+    "react-native",
+    "ios",
+    "haptics",
+    "core-haptics"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://example.com",
+  "dependencies": {
+    "expo-modules-core": "~57.0.7"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}
